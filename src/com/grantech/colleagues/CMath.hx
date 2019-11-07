@@ -1,4 +1,4 @@
-package;
+package com.grantech.colleagues;
 
 class CMath {
 	static public var EPSILON:Float = 0.0001;
