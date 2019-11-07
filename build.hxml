@@ -1,0 +1,10 @@
+-cp tests
+-cp src
+# -lib impulse
+# -D analyzer-optimize
+-main BattleFieldTest
+# --interp
+# -cpp bin/cpp
+-D advanced-telemetry
+-swf bin/application.swf
+-swf-header 600:800:60:333333
