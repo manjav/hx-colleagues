@@ -33,28 +33,14 @@ class BattleFieldTest extends Sprite {
 
 		this.engine = new Colleagues2d(1 / stage.frameRate);
 
-		var b:Colleague = null;
-		// center
-		var p = Shape.create_box(200, 44);
-		b = this.engine.add(p, 300, 400);
-		b.setStatic();
-		// top side
-		var p = Shape.create_box(300, 10);
-		b = this.engine.add(p, 300, 0);
-		b.setStatic();
-		// right side
-		var p = Shape.create_box(30, 400);
-		b = this.engine.add(p, 600, 400);
-		b.setStatic();
-		// bottom side
-		var p = Shape.create_box(300, 30);
-		b = this.engine.add(p, 300, 800);
-		b.setStatic();
-		// left side
-		var p = Shape.create_box(30, 400);
-		b = this.engine.add(p, 0, 400);
-		b.setStatic();
+		// obstacles
+		this.engine.add(Shape.create_box(200, 44), 300, 400	).setStatic(); // center
+		this.engine.add(Shape.create_box(300, 10), 300, 0		).setStatic(); // top
+		this.engine.add(Shape.create_box(30, 400), 600, 400	).setStatic(); // right
+		this.engine.add(Shape.create_box(300, 30), 300, 800	).setStatic(); // bottom
+		this.engine.add(Shape.create_box(30, 400), 0	, 400	).setStatic(); // left
 
+		// targets
 		targets = new Array();
 		var p = 50;
 		var p2 = 150;
@@ -96,10 +82,18 @@ class BattleFieldTest extends Sprite {
 				// b.dynamicFriction = 0.2;
 				// b.staticFriction = 0.4; */
 		} else {
-			b = this.engine.add(Shape.create_circle(random(min, max)), mx, my);
-			b.speed = random(50, 150);
-			b.side = b.y > stage.stageHeight * 0.5 ? 0 : 1;
+			var s = random(min, max);
+			var sp = random(50, 150);
+			for(i in 0...10)
+				addUnit(s, sp, mx, my);
 		}
+	}
+
+	function addUnit(size:Float, speed:Float, x:Int, y:Int)
+	{
+		var b = this.engine.add(Shape.create_circle(size), x, y);
+		b.speed = speed;
+		b.side = b.y > stage.stageHeight * 0.5 ? 0 : 1;
 	}
 
 	private function random(min:Float, max:Float):Float {
